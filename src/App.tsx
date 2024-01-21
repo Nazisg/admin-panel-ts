@@ -1,12 +1,14 @@
-import Login from './shared/components/Login'
-import './styles/reset.scss'
+import { BrowserRouter as Router } from "react-router-dom";
+import Routers from "./routes/index";
+import "./styles/reset.scss";
 function App() {
-
   return (
     <>
-   <Login />
+      <Router>
+        <Routers />
+      </Router>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

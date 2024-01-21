@@ -1,0 +1,29 @@
+.side-menu {
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: #fff;
+  padding: 20px;
+  h2 {
+    display: flex;
+    justify-content: center;
+  }
+  ul {
+    li {
+      padding: 10px 20px;
+      color: inherit;
+      font-size: 20px;
+      cursor: pointer;
+      &:hover {
+        background-color: #e7e7ff;
+        color: #696cff;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+      }
+    }
+  }
+}

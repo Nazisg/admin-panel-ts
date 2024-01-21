@@ -1,10 +1,12 @@
-import React from "react";
-import "./style.scss";
-import { Button, Form, Input, Typography } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Form, Input, Typography } from "antd";
+import { useNavigate } from "react-router-dom";
+import "./style.scss";
 export default function Login() {
+  const navigate = useNavigate();
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
+    navigate("/dashboard");
   };
 
   return (
@@ -15,7 +17,7 @@ export default function Login() {
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
-        <Typography.Title>Login</Typography.Title>
+        <Typography.Title className="title">Login</Typography.Title>
         <Form.Item
           rules={[
             {
