@@ -1,12 +1,13 @@
-import { BrowserRouter as Router } from "react-router-dom";
-import Routers from "./routes/index";
+import { BrowserRouter } from "react-router-dom";
 import "./styles/reset.scss";
+import Routes from "./pages";
+import "./styles/fonts.scss";
 function App() {
   return (
     <>
-      <Router>
-        <Routers />
-      </Router>
+      <BrowserRouter>
+        <Routes />
+      </BrowserRouter>
     </>
   );
 }
