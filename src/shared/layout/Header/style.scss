@@ -1,15 +1,17 @@
-.header{
-    width: 100%;
-    background-color: #fff;
-    // padding: 10px 20px;
-    border-radius: 10px;
-    font-size: 18px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-    display: flex;
-    justify-content:flex-end;
-    align-items: center;
-    gap: 3;
+.header {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  font-size: 18px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3;
+  .search-input {
+  }
+  
 }

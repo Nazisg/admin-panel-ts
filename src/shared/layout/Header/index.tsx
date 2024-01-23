@@ -1,8 +1,9 @@
-import { Avatar, Button, Layout, Switch } from "antd";
+import { Avatar, Button, Input, Layout, Switch } from "antd";
 import "./style.scss";
 import { SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { MdLightMode } from "react-icons/md";
 import { useState } from "react";
+import { MdOutlineLightMode } from "react-icons/md";
 
 export default function index() {
   const { Header } = Layout;
@@ -13,14 +14,14 @@ export default function index() {
   };
 
   return (
-    <Header
-    // theme={darkMode ? "dark" : "light"}
-    className="header"
-  >
-      <Button shape="circle" onClick={() => handleThemeChange(!darkMode)}>
-          <MdLightMode />
-        </Button>
+    <Header className="header">
+      <SearchOutlined />
+      {/* <Input size="middle" className="search-input"/> */}
+      <div>
+        <MdOutlineLightMode className="light" />
+
         <Avatar icon={<UserOutlined />} />
-      </Header>
+      </div>{" "}
+    </Header>
   );
 }

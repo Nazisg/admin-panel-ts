@@ -1,7 +1,9 @@
 @font-face {
-    font-family: lexend-400;
-    src: url(../shared/media/fonts/Lexend-Regular.ttf);
-  }
-  *{
-    font-family: lexend-400;
-  }
+  font-family: lexend-400;
+  src: url(../shared/media/fonts/Lexend-Regular.ttf);
+}
+* {
+  font-family: lexend-400;
+  color: #4d5f71 !important;
+  font-size: 18px;
+}

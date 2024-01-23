@@ -1,29 +1,19 @@
 .side-menu {
-  width: 350px;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  background-color: #fff;
-  padding: 20px;
-  h2 {
+  flex: 0 0 350px!important;
+  width:250px!important ;
+  max-width: 250px!important;
+    min-width: 250px!important;
+    width: 250px!important;
+    padding-top: 20px;
+    color: gray;
+  .title {
     display: flex;
     justify-content: center;
+    font-size: 35px;
   }
-  ul {
-    li {
-      padding: 10px 20px;
-      color: inherit;
-      font-size: 20px;
-      cursor: pointer;
-      &:hover {
-        background-color: #e7e7ff;
-        color: #696cff;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        -ms-border-radius: 10px;
-        -o-border-radius: 10px;
-      }
+  ul{
+    li{
+      font-size: 18px;
     }
   }
 }

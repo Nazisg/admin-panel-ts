@@ -3,7 +3,8 @@
     "baseUrl": ".",
     "paths": {
       "src/*": ["./src/*"],
-      "shared/*":["./src/shared/*"]
+      "shared/*":["./src/shared/*"],
+      "component/*":["./src/shared/components/*"]
     },
     "target": "ES2020",
     "useDefineForClassFields": true,
