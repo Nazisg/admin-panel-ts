@@ -10,4 +10,7 @@ export default defineConfig({
       componets:"/src/shared/components"
     },
   },
+  server:{
+    port:3000
+  }
 })

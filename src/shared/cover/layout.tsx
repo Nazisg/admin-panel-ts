@@ -5,6 +5,7 @@ import SideMenu from "shared/layout/SideMenu";
 import Overview from "src/shared/components/home/Overview";
 import { Outlet } from "react-router-dom";
 import './style.scss'
+import PrivateRouter from "src/pages/PrivateRouter";
 export default function index() {
   const { Content } = Layout;
 
@@ -14,8 +15,9 @@ export default function index() {
         <SideMenu />
         <Layout className="wrapper">
           <Header />
-          <Content>
-            <Outlet />
+          <PrivateRouter/>
+          <Content className="content">
+            {/* <Outlet /> */}
           </Content>
         </Layout>
       </Layout>
