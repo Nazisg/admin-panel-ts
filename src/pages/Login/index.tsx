@@ -1,7 +1,7 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
-import "./style.scss";
+import styles from './style..module.scss'
 export default function Login() {
   const navigate = useNavigate();
   const onFinish = (values: any) => {
@@ -10,14 +10,14 @@ export default function Login() {
   };
 
   return (
-    <div className="login-bg">
+    <div className={styles.loginBg}>
       <Form
-        className="form"
+        className={styles.form}
         name="normal_login"
         initialValues={{ remember: true }}
         onFinish={onFinish}
       >
-        <Typography.Title className="title">Login</Typography.Title>
+        <Typography.Title className={styles.title}>Login</Typography.Title>
         <Form.Item
           rules={[
             {

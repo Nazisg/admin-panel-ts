@@ -1,0 +1,21 @@
+.header {
+  width: 100%;
+  border-radius: 10px;
+  font-size: 18px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: transparent;
+  gap: 3;
+  .light {
+    width: 30px;
+  }
+  .title{
+font-size: 20px;
+  }
+
+}

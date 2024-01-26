@@ -20,27 +20,28 @@ export default function index() {
       <Menu
         theme="light"
         mode="inline"
-        defaultSelectedKeys={["1"]}>
-        <Menu.Item key="1" icon={<HomeOutlined />}>
-          <Link to="/">Dashboard</Link>
-        </Menu.Item>
-        <Menu.Item key="2" icon={<SettingOutlined />}>
-          <Link to="/account">Account Settings</Link>
-        </Menu.Item>
-        <Menu.Item key="3" icon={<UserOutlined />}>
-          <Link to="/users">Users</Link>
-        </Menu.Item>
-        <Menu.Item key="4" icon={<TeamOutlined />}>
-          <Link to="/teams">Teams</Link>
-        </Menu.Item>
-        <Menu.Item key="5" icon={<FormOutlined />}>
-          <Link to="/daily-report">Daily Report</Link>
-        </Menu.Item>
-        <Menu.Item key="6" icon={<FolderOutlined />}>
-          <Link to="/projects">Projects</Link>
-        </Menu.Item>
+        defaultSelectedKeys={["1"]}
+        items={[
+         {
+          label: <Link to="/employees">Employees</Link>,
+          key: "1",
+          icon: <UserOutlined />,
+         },{
+          label: <Link to="/teams">Teams</Link>,
+          key: "2",
+          icon: <TeamOutlined />,
+         },{
+          label: <Link to="/daily-report">Daily Report</Link>,
+          key: "3",
+          icon: <FormOutlined />,
+         },{
+          label: <Link to="/projects">Projects</Link>,
+          key: "4",
+          icon: <FolderOutlined />,
+         }
+       ]}
+      >
       </Menu>
-      
     </Sider>
   );
 }
