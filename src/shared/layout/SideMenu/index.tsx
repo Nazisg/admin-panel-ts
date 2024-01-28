@@ -23,7 +23,7 @@ export default function index() {
         defaultSelectedKeys={["1"]}
         items={[
          {
-          label: <Link to="/employees">Employees</Link>,
+          label: <Link to="/">Employees</Link>,
           key: "1",
           icon: <UserOutlined />,
          },{
