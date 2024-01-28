@@ -37,7 +37,7 @@ export default function index() {
     confirm({
       title: "Do you want to delete this user?",
       icon: <ExclamationCircleFilled />,
-      // content: 'Some descriptions',
+    
       onOk() {
         console.log("OK");
       },
