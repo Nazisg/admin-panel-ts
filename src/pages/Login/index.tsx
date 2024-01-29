@@ -1,7 +1,7 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Typography } from "antd";
 import { useNavigate } from "react-router-dom";
-import styles from './style..module.scss'
+import styles from './Login..module.scss'
 export default function Login() {
   const navigate = useNavigate();
   const onFinish = (values: any) => {

@@ -1,4 +1,4 @@
-.side-menu {
+.sideMenu {
   // flex: 0 0 350px!important;
   // width:250px!important ;
   // max-width: 250px!important;
@@ -10,10 +10,17 @@
     display: flex;
     justify-content: center;
     font-size: 35px;
+    margin: 0;
   }
   ul{
     li{
       font-size: 18px;
     }
+  }
+  .logo{
+    width: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

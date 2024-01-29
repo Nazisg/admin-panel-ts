@@ -8,7 +8,7 @@ import { Button, Input, Row, Select, Space, Typography } from "antd";
 import Table from "src/shared/components/TableTeams";
 import { useState } from "react";
 import Modal from "src/shared/components/AddUserModal";
-import styles from "./style.module.scss";
+import styles from './Teams.module.scss';
 export default function index() {
   type SizeType = ConfigProviderProps["componentSize"];
   const options: SelectProps["options"] = [];

@@ -4,14 +4,16 @@ import {
   ExclamationCircleFilled,
   EyeOutlined,
   LockOutlined,
+  UserOutlined
 } from "@ant-design/icons";
 import type { TableProps } from "antd";
-import { Button, Modal, Space, Table, Tag, Tooltip } from "antd";
+import { Avatar, Button, Modal, Space, Table, Tag, Tooltip } from "antd";
 import { useState } from "react";
 import EditUserModal from "src/shared/components/EditUserModal";
 import ViewModal from "src/shared/components/ViewModal";
-import styles from './style.module.scss'
+import styles from "./style.module.scss";
 export default function index() {
+  
   const [status, setStatus] = useState<"active" | "deactive">("active");
 
   interface DataType {
@@ -25,19 +27,13 @@ export default function index() {
     status: string;
   }
   const { confirm } = Modal;
-  // const handleToggleStatus = (record: DataType) => {
-  //   if (record.status === "active") {
-  //     setStatus("deactive")
-  //   }
-    
-  //   }
 
- 
+
   const showConfirm = () => {
     confirm({
       title: "Do you want to delete this user?",
       icon: <ExclamationCircleFilled />,
-    
+
       onOk() {
         console.log("OK");
       },
@@ -56,12 +52,13 @@ export default function index() {
       title: "Name",
       dataIndex: "firstName",
       key: "firstName",
-      // render: (text) => (
-      //   <>
-      //     <Avatar icon={<UserOutlined />} alt="Avatar" />
-      //     <a style={{ marginLeft: 10 }}>{text}</a>
-      //   </>
-      // ),
+      render: (text) => (
+        <>
+          <Avatar icon={<UserOutlined />} alt="Avatar" />
+          {/* <Avatar style={{ backgroundColor: '#6743c159', color: '#E73F4C' }}>{text.slice(0,1)}</Avatar> */}
+          <a style={{ marginLeft: 10 }}>{text}</a>
+        </>
+      ),
     },
     {
       title: "Surname",
@@ -72,6 +69,16 @@ export default function index() {
       title: "Mail",
       dataIndex: "mail",
       key: "mail",
+    },
+    {
+      title: "Teams",
+      dataIndex: "team",
+      key: "team",
+    },
+    {
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
     },
     {
       title: "Status",
@@ -86,44 +93,36 @@ export default function index() {
         }
         return (
           <Tag
-          //  onClick={() => handleToggleStatus(record)} 
-           color={color} key={record.status}>
+            //  onClick={() => handleToggleStatus(record)}
+            color={color}
+            key={record.status}
+          >
             {record.status.toUpperCase()}
           </Tag>
         );
       },
     },
     {
-      title: "Teams",
-      dataIndex: "team",
-      key: "team",
-    },
-    {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
-    },
-    {
       title: "Action",
       key: "action",
       render: () => (
         <Space size="small">
-          <Tooltip placement="top" title="view">
+          <Tooltip placement="top" title="View">
             <Button shape="circle" onClick={showModal}>
               <EyeOutlined />
             </Button>
           </Tooltip>
-          <Tooltip placement="top" title="update">
+          <Tooltip placement="top" title="Update">
             <Button shape="circle" onClick={showModal}>
               <EditOutlined />
             </Button>
           </Tooltip>
-          <Tooltip placement="top" title="reset password">
+          <Tooltip placement="top" title="Reset password">
             <Button shape="circle">
               <LockOutlined />
             </Button>
           </Tooltip>
-          <Tooltip placement="top" title="delete">
+          <Tooltip placement="top" title="Delete">
             <Button shape="circle" danger onClick={showConfirm}>
               <DeleteOutlined />
             </Button>
@@ -168,12 +167,17 @@ export default function index() {
 
   return (
     <div>
-      <Table className={styles.table} columns={columns} dataSource={data} />
-      <EditUserModal
+      <Table
+        bordered
+        className={styles.table}
+        columns={columns}
+        dataSource={data}
+      />
+      {/* <EditUserModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
       />
-      <ViewModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <ViewModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} /> */}
     </div>
   );
 }
