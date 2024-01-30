@@ -1,7 +1,18 @@
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { Avatar, Button, Col, Form, Input, Layout, Modal, Space, Tooltip, Typography } from "antd";
+import {
+  Avatar,
+  Button,
+  Col,
+  Form,
+  Input,
+  Layout,
+  Modal,
+  Space,
+  Tooltip,
+  Typography,
+} from "antd";
 import { useState } from "react";
-import { MdOutlineLightMode,MdOutlineNightlight } from "react-icons/md";
+import { MdOutlineLightMode, MdOutlineNightlight } from "react-icons/md";
 import styles from "./Header.module.scss";
 export default function index() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -43,37 +54,38 @@ export default function index() {
         </Typography.Title>
         <Avatar icon={<UserOutlined />} />
         <Tooltip placement="top" title="Change password">
-            <Button shape="circle"onClick={showModal}>
-              <LockOutlined />
-            </Button>
+          <Button shape="circle" onClick={showModal}>
+            <LockOutlined />
+          </Button>
         </Tooltip>
         <Button shape="circle" onClick={() => handleThemeChange(!darkMode)}>
           <MdOutlineLightMode className={styles.ligth} />
         </Button>
       </Space>
       {/* //change password modal */}
-      <Modal title="Change Password" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-          <Form
-            name="basic"
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
-            autoComplete="off"
-            layout="vertical"
-          >
-              <Form.Item<FieldType> label="New Password" name="newPassword">
-                <Input placeholder="********" size="large" />
-              </Form.Item>
-              <Form.Item<FieldType>
-                label="Confirm Password"
-                name="confirmPassword"
-              >
-                <Input placeholder="********" size="large" />
-              </Form.Item>
-
-            <Button type="primary" htmlType="submit">
-              Change Password
-            </Button>
-          </Form>
+      <Modal
+        title="Change Password"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <Form
+          name="basic"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
+          autoComplete="off"
+          layout="vertical"
+        >
+          <Form.Item<FieldType> label="New Password" name="newPassword">
+            <Input placeholder="********" size="large" />
+          </Form.Item>
+          <Form.Item<FieldType> label="Confirm Password" name="confirmPassword">
+            <Input placeholder="********" size="large" />
+          </Form.Item>
+          <Button type="primary" htmlType="submit">
+            Change Password
+          </Button>
+        </Form>
       </Modal>
     </Header>
   );

@@ -7,9 +7,9 @@ export default function index() {
   return (
     <div>
         <Button></Button>
-        <CustomModal>
+        {/* <CustomModal>
 
-        </CustomModal>
+        </CustomModal> */}
     </div>
   )
 }

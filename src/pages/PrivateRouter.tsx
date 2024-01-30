@@ -5,7 +5,6 @@ import Teams from './Teams'
 import DailyReport from './DailyReport'
 import Projects from './Projects'
 import Login from './Login'
-import ChangePassword from "./ChangePassword";
 
 export default function PrivateRouter() {
   return (
@@ -15,7 +14,6 @@ export default function PrivateRouter() {
           <Route path="/teams" element={<Teams />} />
           <Route path="/daily-report" element={<DailyReport />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/change-password" element={<ChangePassword />} />
         {/* <Route path="/login" element={<Login />} /> */}
       </Routes>
     </>

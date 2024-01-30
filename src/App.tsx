@@ -2,7 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import Router from "src/pages/index";
 import "./styles/fonts.scss";
 import "./styles/reset.scss";
-
+import './styles/table.scss'
 function App() {
   return (
     <>

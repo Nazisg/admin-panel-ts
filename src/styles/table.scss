@@ -1,0 +1,44 @@
+.title {
+  font-size: 25px !important;
+  margin-bottom: 20px;
+}
+.table {
+  margin-top: 20px;
+
+  .btnView {
+    color: #226add;
+    border: 1px solid #226add;
+    &:hover {
+      background-color: #226add9a;
+      color: #fff !important;
+      border: 1px solid #226add;
+    }
+  }
+  .btnUpdate {
+    color: #e29106;
+    border: 1px solid #e29106;
+    &:hover {
+      color: #fff !important;
+      background-color: #d48907ab;
+      border: 1px solid #e29106 !important;
+    }
+  }
+  .btnReset {
+    color: #1f1818;
+    border: 1px solid #1f1818;
+    &:hover {
+      color: #fff !important;
+      background-color: #271c1c70;
+      border: 1px solid #362d2d !important;
+    }
+  }
+  .btnDel {
+    color: #fc5a5d;
+    border: 1px solid #fc5a5d;
+    &:hover {
+      color: #fff !important;
+      background-color: #fc5a5d9a;
+      border: 1px solid #fc5a5d !important;
+    }
+  }
+}

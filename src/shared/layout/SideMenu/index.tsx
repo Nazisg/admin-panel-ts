@@ -17,6 +17,7 @@ export default function index() {
     <Sider theme="light" className={styles.sideMenu}>
       <Typography.Title className={styles.title}>
         <img className={styles.logo} src={logo} />
+        CRM
       </Typography.Title>
       <Menu
         theme="light"

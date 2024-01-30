@@ -6,29 +6,38 @@ import {
   FilterOutlined,
   LockOutlined,
   UserAddOutlined,
-  UserOutlined
+  UserOutlined,
 } from "@ant-design/icons";
 import type { ConfigProviderProps, SelectProps, TableProps } from "antd";
 import {
   Avatar,
   Button,
+  Col,
+  Descriptions,
   Drawer,
+  Flex,
   Form,
   Input,
   Modal,
+  Row,
   Select,
   Space,
   Table,
-  Tag, Tooltip,
-  Typography
+  Tag,
+  Tooltip,
+  Typography,
 } from "antd";
 import { useState } from "react";
 import styles from "./Employees.module.scss";
 export default function index() {
   type SizeType = ConfigProviderProps["componentSize"];
+  const onFinish = (values: any) => {
+    console.log("Success:", values);
+  };
+  //select
   const optionsTeams: SelectProps["options"] = [];
   const optionsProject: SelectProps["options"] = [];
-
+  const optionsRole: SelectProps["options"] = [];
   const teams = [
     { id: "1", teamName: "Frontend" },
     { id: "2", teamName: "Backend" },
@@ -39,57 +48,101 @@ export default function index() {
     { id: "2", projectName: "Furniro" },
     { id: "3", projectName: "DailyReport" },
   ];
-
+  const roles = [
+    { id: "1", roleName: "Admin" },
+    { id: "2", roleName: "Employee" },
+  ];
   teams.map((team) => {
     optionsTeams.push({
       value: team.id,
       label: team.teamName,
     });
   });
-
   projects.map((project) => {
     optionsProject.push({
       value: project.id,
       label: project.projectName,
     });
   });
-
+  roles.map((role) => {
+    optionsRole.push({
+      value: role.id,
+      label: role.roleName,
+    });
+  });
   const handleChangeTeams = (value: string | string[]) => {
     console.log(`Selected: ${value}`);
   };
   const handleChangeProjects = (value: string | string[]) => {
     console.log(`Selected: ${value}`);
   };
-  //modal
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalOpenFilter, setIsModalOpenFilter] = useState(false);
-  const showModalFilter = () => {
-    setIsModalOpenFilter(true);
+  const handleChangeRole = (value: string | string[]) => {
+    console.log(`Selected: ${value}`);
   };
 
-  const handleOk = () => {
-    setIsModalOpenFilter(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpenFilter(false);
-  };
-
-  // const showModal = () => {
-  //   setIsModalOpen(true);
-  // };
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
-  };
-  ///filter Drawer
+  //filter Drawer
   const [open, setOpen] = useState(false);
-
   const showDrawer = () => {
     setOpen(true);
   };
-
   const onClose = () => {
     setOpen(false);
+  };
+  ///view
+  const [openView, setOpenView] = useState(false);
+
+  const showDrawerView = () => {
+    setOpenView(true);
+  };
+  const onCloseView = () => {
+    setOpenView(false);
+  };
+  const [selectedEmployee, setSelectedEmployee] = useState<DataType | null>(
+    null
+  );
+  const handleView = (record: DataType) => {
+    setSelectedEmployee(record);
+    showDrawerView();
+  };
+  //confirm
+  const { confirm } = Modal;
+
+  const showConfirm = () => {
+    confirm({
+      title: "Do you want to delete this employee?",
+      icon: <ExclamationCircleFilled />,
+      onOk() {
+        console.log("OK");
+      },
+      onCancel() {
+        console.log("Cancel");
+      },
+    });
+  };
+  //create modal
+  const [isModalOpenAdd, setIsModalOpenAdd] = useState(false);
+  const showModalAdd = () => {
+    setIsModalOpenAdd(true);
+  };
+  const handleOkAdd = () => {
+    setIsModalOpenAdd(false);
+  };
+  const handleCancelAdd = () => {
+    setIsModalOpenAdd(false);
+  };
+  //update modal
+  const [isModalOpenUpdate, setIsModalOpenUpdate] = useState(false);
+
+  const showModalUpdate = () => {
+    setIsModalOpenUpdate(true);
+  };
+
+  const handleOkUpdate = () => {
+    setIsModalOpenUpdate(false);
+  };
+
+  const handleCancelUpdate = () => {
+    setIsModalOpenUpdate(false);
   };
 
   ///table
@@ -105,25 +158,14 @@ export default function index() {
     role: string;
     status: string;
   }
-  const { confirm } = Modal;
-
-  const showConfirm = () => {
-    confirm({
-      title: "Do you want to delete this user?",
-      icon: <ExclamationCircleFilled />,
-
-      onOk() {
-        console.log("OK");
-      },
-      onCancel() {
-        console.log("Cancel");
-      },
-    });
-  };
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const showModal = () => {
-    setIsModalOpen(true);
+  type FieldType = {
+    firstName?: string;
+    lastName?: string;
+    userName?: string;
+    mail?: string;
+    team?: string;
+    status?: string;
+    role?: string;
   };
   const columns: TableProps<DataType>["columns"] = [
     {
@@ -183,25 +225,42 @@ export default function index() {
     {
       title: "Action",
       key: "action",
-      render: () => (
+      render: (record) => (
         <Space size="small">
           <Tooltip placement="top" title="View">
-            <Button shape="circle" onClick={showModal}>
+            <Button
+              className={"btnView"}
+              shape="circle"
+              onClick={() => handleView(record)}
+            >
               <EyeOutlined />
             </Button>
           </Tooltip>
           <Tooltip placement="top" title="Update">
-            <Button shape="circle" onClick={showModal}>
+            <Button
+              className={"btnUpdate"}
+              shape="circle"
+              onClick={showModalUpdate}
+            >
               <EditOutlined />
             </Button>
           </Tooltip>
           <Tooltip placement="top" title="Reset password">
-            <Button shape="circle">
+            <Button
+              className={"btnReset"}
+              shape="circle"
+              onClick={showModalResetPassword}
+            >
               <LockOutlined />
             </Button>
           </Tooltip>
           <Tooltip placement="top" title="Delete">
-            <Button shape="circle" danger onClick={showConfirm}>
+            <Button
+              className={"btnDel"}
+              shape="circle"
+              danger
+              onClick={showConfirm}
+            >
               <DeleteOutlined />
             </Button>
           </Tooltip>
@@ -209,7 +268,6 @@ export default function index() {
       ),
     },
   ];
-
   const data: DataType[] = [
     {
       key: "1",
@@ -242,30 +300,45 @@ export default function index() {
       status: "deactive",
     },
   ];
+  //reset password
+  type FieldTypeResetPassword = {
+    newPassword?: string;
+    confirmPassword?: string;
+  };
+  const [isModalOpenResetPassword, setIsModalOpenResetPassword] =
+    useState(false);
+
+  const showModalResetPassword = () => {
+    setIsModalOpenResetPassword(true);
+  };
+
+  const handleOkResetPassword = () => {
+    setIsModalOpenResetPassword(false);
+  };
+
+  const handleCancelResetPassword = () => {
+    setIsModalOpenResetPassword(false);
+  };
   return (
-    <div className={styles.users}>
-      <Typography.Title className={styles.title}>Employees </Typography.Title>
-      <Space>
-        <Button onClick={showDrawer} icon={<FilterOutlined />} size="large">
-          Filter
-        </Button>
-        <Button
-          onClick={showModal}
-          type="primary"
-          shape="round"
-          icon={<UserAddOutlined />}
-          size="large"
-        >
-          Add Employee
-        </Button>
-      </Space>
-      <Table
-        bordered
-        className={styles.table}
-        columns={columns}
-        dataSource={data}
-      />
-      {/* <Modal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} /> */}
+    <>
+      <Flex justify="space-between">
+        <Typography.Title className="title">Employees</Typography.Title>
+        <Flex justify="flex-end" align="center" gap="middle">
+          <Button onClick={showDrawer} icon={<FilterOutlined />} size="large">
+            Filter
+          </Button>
+          <Button
+            onClick={showModalAdd}
+            type="primary"
+            shape="round"
+            icon={<UserAddOutlined />}
+            size="large"
+          >
+            Create Employee
+          </Button>
+        </Flex>
+      </Flex>
+      <Table bordered className="table" columns={columns} dataSource={data} />
       <Drawer title="Employees Filter" onClose={onClose} open={open}>
         <Form
           name="basic"
@@ -298,6 +371,229 @@ export default function index() {
           </Form.Item>
         </Form>
       </Drawer>
-    </div>
+      <Modal
+        title="Create Employee"
+        open={isModalOpenAdd}
+        onOk={handleOkAdd}
+        onCancel={handleCancelAdd}
+        centered
+      >
+        <Form
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          autoComplete="off"
+          layout="vertical"
+        >
+          <Row gutter={[16, 16]}>
+            <Col span={12}>
+              <Form.Item
+                label=" Name"
+                name="firstName"
+                rules={[{ required: true, message: "" }]}
+              >
+                <Input placeholder="Nazrin" size="large" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                label="Surname"
+                name="lastName"
+                rules={[{ required: true, message: "" }]}
+              >
+                <Input placeholder="Isgandarova" size="large" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={[16, 16]}>
+            <Col span={12}>
+              <Form.Item<FieldType>
+                label="Mail"
+                name="userName"
+                rules={[{ required: true, message: "" }]}
+              >
+                <Input placeholder="nazrin@crocusoft.az" size="large" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item<FieldType>
+                label="Password"
+                name="mail"
+                rules={[{ required: true, message: "" }]}
+              >
+                <Input placeholder="********" size="large" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={[16, 16]}>
+            <Col span={12}>
+              <Form.Item
+                label="Teams"
+                name="teams"
+                rules={[{ required: true, message: "" }]}
+              >
+                <Select
+                  size="large"
+                  onChange={handleChangeTeams}
+                  placeholder="Frontend"
+                  options={optionsTeams}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                label="Role"
+                name="role"
+                rules={[{ required: true, message: "" }]}
+              >
+                <Select
+                  size="large"
+                  onChange={handleChangeRole}
+                  placeholder="Employee"
+                  options={optionsRole}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          {/* <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item> */}
+        </Form>
+      </Modal>
+      <Drawer title="View Employee" onClose={onCloseView} open={openView}>
+        {selectedEmployee && (
+          <Descriptions layout="vertical" bordered>
+            {Object.entries(selectedEmployee).map(([key, value]) => (
+              <Descriptions.Item key={key} label={key}>
+                {value}
+              </Descriptions.Item>
+            ))}
+          </Descriptions>
+        )}
+      </Drawer>
+      <Modal
+        title="Update EmployeeRe"
+        open={isModalOpenUpdate}
+        onOk={handleOkUpdate}
+        onCancel={handleCancelUpdate}
+        centered
+      >
+        <Form
+          name="basic"
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          autoComplete="off"
+          layout="vertical"
+        >
+          <Row gutter={[16, 16]}>
+            <Col span={12}>
+              <Form.Item
+                label=" Name"
+                name="firstName"
+                rules={[{ required: true, message: "" }]}
+              >
+                <Input placeholder="Nazrin" size="large" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                label="Surname"
+                name="lastName"
+                rules={[{ required: true, message: "" }]}
+              >
+                <Input placeholder="Isgandarova" size="large" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={[16, 16]}>
+            <Col span={12}>
+              <Form.Item<FieldType>
+                label="Mail"
+                name="userName"
+                rules={[{ required: true, message: "" }]}
+              >
+                <Input placeholder="nazrin@crocusoft.az" size="large" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item<FieldType>
+                label="Password"
+                name="mail"
+                rules={[{ required: true, message: "" }]}
+              >
+                <Input placeholder="********" size="large" />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={[16, 16]}>
+            <Col span={12}>
+              <Form.Item
+                label="Teams"
+                name="teams"
+                rules={[{ required: true, message: "" }]}
+              >
+                <Select
+                  size="large"
+                  onChange={handleChangeTeams}
+                  placeholder="Frontend"
+                  options={optionsTeams}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                label="Role"
+                name="role"
+                rules={[{ required: true, message: "" }]}
+              >
+                <Select
+                  size="large"
+                  onChange={handleChangeRole}
+                  placeholder="Employee"
+                  options={optionsRole}
+                />
+              </Form.Item>
+            </Col>
+          </Row>
+          {/* <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item> */}
+        </Form>
+      </Modal>
+      <Modal
+        title="Reset Password"
+        open={isModalOpenResetPassword}
+        onOk={handleOkResetPassword}
+        onCancel={handleCancelResetPassword}
+        centered
+      >
+        <Form
+          name="basic"
+          onFinish={onFinish}
+          autoComplete="off"
+          layout="vertical"
+        >
+          <Form.Item<FieldTypeResetPassword>
+            label="New Password"
+            name="newPassword"
+          >
+            <Input placeholder="********" size="large" />
+          </Form.Item>
+          <Form.Item<FieldTypeResetPassword>
+            label="Confirm Password"
+            name="confirmPassword"
+          >
+            <Input placeholder="********" size="large" />
+          </Form.Item>
+          {/* <Button type="primary" htmlType="submit">
+            Reset Password
+          </Button> */}
+        </Form>
+      </Modal>
+    </>
   );
 }
