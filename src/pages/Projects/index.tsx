@@ -1,35 +1,25 @@
 import {
-  DeleteOutlined,
   EditOutlined,
-  ExclamationCircleFilled,
   EyeOutlined,
   FilterOutlined,
-  LockOutlined,
-  UserAddOutlined,
-  UserOutlined,
-  FolderAddOutlined,
+  PlusOutlined
 } from "@ant-design/icons";
 import type { ConfigProviderProps, SelectProps, TableProps } from "antd";
 import {
-  Avatar,
   Button,
-  Col,
   Descriptions,
   Drawer,
   Flex,
   Form,
   Input,
   Modal,
-  Row,
   Select,
   Space,
   Table,
-  Tag,
   Tooltip,
-  Typography,
+  Typography
 } from "antd";
 import { useState } from "react";
-import styles from "./Employees.module.scss";
 export default function index() {
   type SizeType = ConfigProviderProps["componentSize"];
   const onFinish = (values: any) => {
@@ -211,20 +201,27 @@ export default function index() {
       <Flex justify="space-between">
         <Typography.Title className="title">Projects</Typography.Title>
         <Flex justify="flex-end" align="center" gap="middle">
-          <Button onClick={showDrawer} icon={<FilterOutlined />} size="large">
+          <Button
+            onClick={showDrawer}
+            icon={<FilterOutlined />}
+            size="large"
+            type="primary"
+            ghost
+          >
             Filter
           </Button>
-          <Button
-            onClick={showModalAdd}
-            type="primary"
-            shape="round"
-            icon={<FolderAddOutlined />}
-            size="large"
-          >
-            Create Project
-          </Button>
+          <Tooltip placement="top" title="Create">
+            <Button
+              onClick={showModalAdd}
+              type="primary"
+              shape="circle"
+              icon={<PlusOutlined />}
+              size="large"
+              className="create-btn"
+            ></Button>
+          </Tooltip>
         </Flex>
-      </Flex>{" "}
+      </Flex>
       <Table bordered className="table" columns={columns} dataSource={data} />
       <Drawer title="Projects Filter" onClose={onClose} open={open}>
         <Form
@@ -234,13 +231,7 @@ export default function index() {
           layout="vertical"
         >
           <Form.Item label="Project Name" name="projectName">
-            <Select
-              mode="tags"
-              size="large"
-              placeholder="Furniro"
-              onChange={handleChangeProjects}
-              options={optionsProject}
-            />
+            <Input placeholder="Furniro" size="large" />
           </Form.Item>
         </Form>
       </Drawer>
@@ -287,7 +278,7 @@ export default function index() {
       </Modal>
       <Drawer title="View Project" onClose={onCloseView} open={openView}>
         {selectedEmployee && (
-          <Descriptions layout="vertical" bordered>
+          <Descriptions layout="vertical" bordered column={1}>
             {Object.entries(selectedEmployee).map(([key, value]) => (
               <Descriptions.Item key={key} label={key}>
                 {value}

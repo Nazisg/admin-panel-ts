@@ -4,36 +4,31 @@ import {
   ExclamationCircleFilled,
   EyeOutlined,
   FilterOutlined,
-  LockOutlined,
-  UserAddOutlined,
-  UserOutlined,
-  FileAddOutlined,
+  PlusOutlined,
   UploadOutlined,
 } from "@ant-design/icons";
-import type { ConfigProviderProps, SelectProps, TableProps } from "antd";
+import type { SelectProps, TableProps } from "antd";
 import {
-  Avatar,
   Button,
-  Col,
+  DatePicker,
   Descriptions,
   Drawer,
   Flex,
   Form,
-  Input,
   Modal,
-  Row,
   Select,
   Space,
   Table,
-  Tag,
   Tooltip,
   Typography,
 } from "antd";
 import { useState } from "react";
-import { DatePicker } from "antd";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
-import styles from "./DailyReport.module.scss";
 export default function index() {
+  const [value, setValue] = useState("");
+
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };
@@ -166,8 +161,6 @@ export default function index() {
   };
 
   ///table
-  const [status, setStatus] = useState<"active" | "deactive">("active");
-
   interface DataType {
     key: string;
     firstName: string;
@@ -192,7 +185,7 @@ export default function index() {
       render: (text) => (
         <>
           {/* <Avatar icon={<UserOutlined />} alt="Avatar" /> */}
-          <a style={{ marginLeft: 10 }}>{text}</a>
+          <p style={{ marginLeft: 10 }}>{text}</p>
         </>
       ),
     },
@@ -287,21 +280,30 @@ export default function index() {
       <Flex justify="space-between">
         <Typography.Title className="title">Daily Report</Typography.Title>
         <Flex justify="flex-end" align="center" gap="middle">
-          <Button onClick={showDrawer} icon={<FilterOutlined />} size="large">
+          <Button
+            onClick={showDrawer}
+            icon={<FilterOutlined />}
+            size="large"
+            type="primary"
+            ghost
+          >
             Filter
           </Button>
-
-          <Button
-            onClick={showModalAdd}
-            type="primary"
-            shape="round"
-            icon={<FileAddOutlined />}
-            size="large"
-          >
-            Create Daily Report
+          <Button icon={<UploadOutlined />} ghost type="primary" size="large">
+            Export Excel
           </Button>
+          <Tooltip placement="top" title="Create">
+            <Button
+              onClick={showModalAdd}
+              type="primary"
+              shape="circle"
+              icon={<PlusOutlined />}
+              size="large"
+              className="create-btn"
+            ></Button>
+          </Tooltip>
         </Flex>
-      </Flex>{" "}
+      </Flex>
       <Table bordered className="table" columns={columns} dataSource={data} />
       <Drawer title="Daiy Report Filter" onClose={onClose} open={open}>
         <Form
@@ -336,11 +338,6 @@ export default function index() {
               options={optionsEmployees}
             />
           </Form.Item>
-          <Form.Item>
-            <Button icon={<UploadOutlined />} type="primary" size="large">
-              Export Excel
-            </Button>
-          </Form.Item>
         </Form>
       </Drawer>
       <Modal
@@ -371,11 +368,11 @@ export default function index() {
             />
           </Form.Item>
           <Form.Item
-            label="Daily Report"
+            label="Note"
             name="dailyReport"
             rules={[{ required: true, message: "" }]}
           >
-            rich text
+            <ReactQuill theme="snow" value={value} onChange={setValue} />{" "}
           </Form.Item>
           {/* <Form.Item>
             <Button type="primary" htmlType="submit">
@@ -386,7 +383,7 @@ export default function index() {
       </Modal>
       <Drawer title="View Employee" onClose={onCloseView} open={openView}>
         {selectedEmployee && (
-          <Descriptions layout="vertical" bordered>
+          <Descriptions layout="vertical" bordered column={1}>
             {Object.entries(selectedEmployee).map(([key, value]) => (
               <Descriptions.Item key={key} label={key}>
                 {value}
@@ -410,11 +407,10 @@ export default function index() {
           layout="vertical"
         >
           <Form.Item
-            label="Note"
+            // label="Note"
             name="note"
-            // rules={[{ required: true, message: "" }]}
           >
-            rich text
+            <ReactQuill theme="snow" value={value} onChange={setValue} />
           </Form.Item>
           {/* <Form.Item>
             <Button type="primary" htmlType="submit">

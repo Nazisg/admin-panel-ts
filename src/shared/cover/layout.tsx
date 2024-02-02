@@ -1,8 +1,6 @@
 import { Layout } from "antd";
 import Header from "shared/layout/Header";
 import SideMenu from "shared/layout/SideMenu";
-import { Outlet } from "react-router-dom";
-import './style.scss'
 import PrivateRouter from "src/pages/PrivateRouter";
 export default function index() {
   const { Content } = Layout;
@@ -13,10 +11,8 @@ export default function index() {
         <SideMenu />
         <Layout className="wrapper">
           <Header />
-          <PrivateRouter/>
-          <Content className="content">
-            {/* <Outlet /> */}
-          </Content>
+          <PrivateRouter />
+          <Content className="content"></Content>
         </Layout>
       </Layout>
     </>

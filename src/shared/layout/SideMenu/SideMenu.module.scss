@@ -1,12 +1,15 @@
 .sideMenu {
-  padding-top: 20px;
+  padding-top: 25px;
   color: gray;
   .title {
     display: flex;
-    justify-content: center;
     align-items: center;
-    font-size: 25px;
     margin: 0;
+    margin-left: 8px;
+    h1 {
+      font-size: 25px;
+      margin: 0;
+    }
   }
   ul {
     li {
@@ -19,4 +22,12 @@
     align-items: center;
     justify-content: center;
   }
+}
+.activeLink{
+  background-color:#6743c121!important;
+  color: #6743C1!important;
+}
+.ant-layout-sider-trigger{
+  background:#6743c121!important;
+
 }

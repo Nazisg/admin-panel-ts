@@ -1,22 +1,36 @@
 .loginBg {
   width: 100%;
   height: 100vh;
-  background-color: #4880ff;
   display: flex;
-  justify-content: center;
-  align-items: center;
   .form {
-    width: 400px;
-    background-color: #fff;
-    border-radius: 20px;
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    -ms-border-radius: 20px;
-    -o-border-radius: 20px;
-    padding: 40px;
-    .title{
+    background-color: #ebefff;
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    form {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      width: 400px;
+    
+
+      .title {
+        display: flex;
+        justify-content: center;
+      }
     }
+    .submit{
+      background-color: #afb3ff;
+    }
+  }
+  .logo {
+    background-color: #afb3ff;
+  }
+  img {
+    width: 30%;
+    position: relative !important;
+    left: 20% !important;
+    top: 10px !important;
+    z-index: 99;
   }
 }

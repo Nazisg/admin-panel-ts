@@ -1,6 +1,6 @@
 .title {
   font-size: 25px !important;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 .table {
   margin-top: 20px;
@@ -15,21 +15,21 @@
     }
   }
   .btnUpdate {
-    color: #e29106;
-    border: 1px solid #e29106;
+    color: #ffd000;
+    border: 1px solid #ffd000;
     &:hover {
       color: #fff !important;
-      background-color: #d48907ab;
-      border: 1px solid #e29106 !important;
+      background-color: #ffd00091;
+      border: 1px solid #ffd000 !important;
     }
   }
   .btnReset {
-    color: #1f1818;
-    border: 1px solid #1f1818;
+    color: #ff7300;
+    border: 1px solid #ff7300;
     &:hover {
       color: #fff !important;
-      background-color: #271c1c70;
-      border: 1px solid #362d2d !important;
+      background-color: #ff73009a;
+      border: 1px solid #ff7300 !important;
     }
   }
   .btnDel {
@@ -41,4 +41,13 @@
       border: 1px solid #fc5a5d !important;
     }
   }
+}
+.create-btn {
+  background-color: #36c742;
+  &:hover{
+    background-color: #36c742!important;
+  }
+}
+.ant-layout .ant-layout-sider-light .ant-layout-sider-trigger{
+  background:#6743c121!important;
 }

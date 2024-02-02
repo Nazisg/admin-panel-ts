@@ -5,12 +5,10 @@ import {
   EyeOutlined,
   FilterOutlined,
   LockOutlined,
-  UserAddOutlined,
-  UserOutlined,
+  PlusOutlined
 } from "@ant-design/icons";
-import type { ConfigProviderProps, SelectProps, TableProps } from "antd";
+import type { SelectProps, TableProps } from "antd";
 import {
-  Avatar,
   Button,
   Col,
   Descriptions,
@@ -28,9 +26,7 @@ import {
   Typography,
 } from "antd";
 import { useState } from "react";
-import styles from "./Employees.module.scss";
 export default function index() {
-  type SizeType = ConfigProviderProps["componentSize"];
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };
@@ -175,8 +171,7 @@ export default function index() {
       render: (text) => (
         <>
           {/* <Avatar icon={<UserOutlined />} alt="Avatar" /> */}
-          {/* <Avatar style={{ backgroundColor: '#6743c159', color: '#E73F4C' }}>{text.slice(0,1)}</Avatar> */}
-          <a style={{ marginLeft: 10 }}>{text}</a>
+          <p style={{ marginLeft: 10 }}>{text}</p>
         </>
       ),
     },
@@ -324,18 +319,25 @@ export default function index() {
       <Flex justify="space-between">
         <Typography.Title className="title">Employees</Typography.Title>
         <Flex justify="flex-end" align="center" gap="middle">
-          <Button onClick={showDrawer} icon={<FilterOutlined />} size="large">
+          <Button
+            onClick={showDrawer}
+            icon={<FilterOutlined />}
+            size="large"
+            type="primary"
+            ghost
+          >
             Filter
           </Button>
-          <Button
-            onClick={showModalAdd}
-            type="primary"
-            shape="round"
-            icon={<UserAddOutlined />}
-            size="large"
-          >
-            Create Employee
-          </Button>
+          <Tooltip placement="top" title="Create">
+            <Button
+              onClick={showModalAdd}
+              type="primary"
+              shape="circle"
+              icon={<PlusOutlined />}
+              size="large"
+              className="create-btn"
+            ></Button>
+          </Tooltip>
         </Flex>
       </Flex>
       <Table bordered className="table" columns={columns} dataSource={data} />
@@ -464,7 +466,7 @@ export default function index() {
       </Modal>
       <Drawer title="View Employee" onClose={onCloseView} open={openView}>
         {selectedEmployee && (
-          <Descriptions layout="vertical" bordered>
+          <Descriptions layout="vertical" bordered column={1}>
             {Object.entries(selectedEmployee).map(([key, value]) => (
               <Descriptions.Item key={key} label={key}>
                 {value}

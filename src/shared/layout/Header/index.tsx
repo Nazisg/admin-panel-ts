@@ -1,20 +1,22 @@
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import {
   Avatar,
   Button,
-  Col,
   Form,
   Input,
   Layout,
   Modal,
   Space,
   Tooltip,
-  Typography,
+  Typography
 } from "antd";
 import { useState } from "react";
-import { MdOutlineLightMode, MdOutlineNightlight } from "react-icons/md";
+import { MdOutlineLightMode } from "react-icons/md";
 import styles from "./Header.module.scss";
-export default function index() {
+type ThemeProps = {
+  setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>> | undefined;
+};
+const Header: React.FC<ThemeProps> = ({ setIsDarkMode }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const showModal = () => {
@@ -29,12 +31,6 @@ export default function index() {
     setIsModalOpen(false);
   };
   const { Header } = Layout;
-  const [darkMode, setDarkMode] = useState<boolean>(false);
-
-  const handleThemeChange = (checked: boolean) => {
-    setDarkMode(checked);
-    console.log(darkMode);
-  };
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };
@@ -46,6 +42,12 @@ export default function index() {
     newPassword?: string;
     confirmPassword?: string;
   };
+
+  const handleClick = () => {
+    if (setIsDarkMode) {
+      setIsDarkMode((previousValue) => !previousValue);
+    }
+  };
   return (
     <Header className={styles.header}>
       <Space>
@@ -54,11 +56,11 @@ export default function index() {
         </Typography.Title>
         <Avatar icon={<UserOutlined />} />
         <Tooltip placement="top" title="Change password">
-          <Button shape="circle" onClick={showModal}>
+          <Button shape="circle" type="primary" ghost onClick={showModal}>
             <LockOutlined />
           </Button>
         </Tooltip>
-        <Button shape="circle" onClick={() => handleThemeChange(!darkMode)}>
+        <Button shape="circle" type="primary" ghost onClick={handleClick}>
           <MdOutlineLightMode className={styles.ligth} />
         </Button>
       </Space>
@@ -89,4 +91,5 @@ export default function index() {
       </Modal>
     </Header>
   );
-}
+};
+export default Header;

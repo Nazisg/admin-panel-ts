@@ -3,33 +3,24 @@ import {
   EditOutlined,
   ExclamationCircleFilled,
   EyeOutlined,
-  FilterOutlined,
-  LockOutlined,
-  UserAddOutlined,
-  UserOutlined,
-  UsergroupAddOutlined,
+  PlusOutlined
 } from "@ant-design/icons";
 import type { ConfigProviderProps, SelectProps, TableProps } from "antd";
 import {
-  Avatar,
   Button,
-  Col,
   Descriptions,
   Drawer,
   Flex,
   Form,
   Input,
   Modal,
-  Row,
   Select,
   Space,
   Table,
-  Tag,
   Tooltip,
-  Typography,
+  Typography
 } from "antd";
 import { useState } from "react";
-import styles from "./Teams.module.scss";
 export default function index() {
   type SizeType = ConfigProviderProps["componentSize"];
   const onFinish = (values: any) => {
@@ -97,14 +88,6 @@ export default function index() {
     console.log(`Selected: ${value}`);
   };
 
-  //filter Drawer
-  const [open, setOpen] = useState(false);
-  const showDrawer = () => {
-    setOpen(true);
-  };
-  const onClose = () => {
-    setOpen(false);
-  };
 
   ///view
   const [openView, setOpenView] = useState(false);
@@ -246,20 +229,19 @@ export default function index() {
       <Flex justify="space-between">
         <Typography.Title className="title">Teams</Typography.Title>
         <Flex justify="flex-end" align="center" gap="middle">
-          <Button onClick={showDrawer} icon={<FilterOutlined />} size="large">
-            Filter
-          </Button>
-          <Button
-            onClick={showModalAdd}
-            type="primary"
-            shape="round"
-            icon={<UsergroupAddOutlined />}
-            size="large"
-          >
-            Create Team
-          </Button>
+    
+        <Tooltip placement="top" title="Create">
+            <Button
+              onClick={showModalAdd}
+              type="primary"
+              shape="circle"
+              icon={<PlusOutlined />}
+              size="large"
+              className="create-btn"
+            ></Button>
+          </Tooltip>
         </Flex>
-      </Flex>{" "}
+      </Flex>
       <Table bordered className="table" columns={columns} dataSource={data} />
       <Modal
         title="Create Team"
@@ -304,7 +286,7 @@ export default function index() {
       </Modal>
       <Drawer title="View Team" onClose={onCloseView} open={openView}>
         {selectedEmployee && (
-          <Descriptions>
+          <Descriptions bordered layout="vertical" column={1}>
             {Object.entries(selectedEmployee).map(([key, value]) => (
               <Descriptions.Item key={key} label={key}>
                 {value}
@@ -355,33 +337,6 @@ export default function index() {
           </Form.Item> */}
         </Form>
       </Modal>
-      <Drawer title="Teams Filter" onClose={onClose} open={open}>
-        <Form
-          name="basic"
-          onFinish={onFinish}
-          autoComplete="off"
-          layout="vertical"
-        >
-          <Form.Item label="Teams" name="teams">
-            <Select
-              mode="tags"
-              size="large"
-              onChange={handleChangeTeams}
-              placeholder="Frontend"
-              options={optionsTeams}
-            />
-          </Form.Item>
-          <Form.Item label="Employees" name="employees">
-            <Select
-              mode="tags"
-              size="large"
-              placeholder="Nazrin Isgandarova"
-              onChange={handleChangeEmployees}
-              options={optionsEmployees}
-            />
-          </Form.Item>
-        </Form>
-      </Drawer>
     </>
   );
 }
