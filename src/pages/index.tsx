@@ -4,14 +4,22 @@ import { Route, Routes } from "react-router-dom";
 import { Auxilliary, Cover, Header, SideMenu } from "shared/index";
 import Login from "./Login";
 import PrivateRouter from "./PrivateRouter";
+import RenderIf from "src/shared/components/RenderIf";
 
 const Router = () => {
   const { defaultAlgorithm, darkAlgorithm } = theme;
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const token = false;
+  const token = true;
 
-  if (token) {
-    return (
+  return (
+    <RenderIf
+      conditions={token}
+      renderelse={
+        <Routes>
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      }
+    >
       <ConfigProvider
         theme={{
           algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
@@ -30,23 +38,8 @@ const Router = () => {
           </Auxilliary>
         </Auxilliary>
       </ConfigProvider>
-    );
-  } else {
-    return (
-      // <ConfigProvider
-      //   theme={{
-      //     algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
-      //     token: {
-      //       colorPrimary: "#6743C1",
-      //     },
-      //   }}
-      // >
-        <Routes>
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      // </ConfigProvider>
-    );
-  }
+    </RenderIf>
+  );
 };
 
 export default Router;
