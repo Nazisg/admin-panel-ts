@@ -2,31 +2,33 @@ import { ConfigProvider, theme } from "antd";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Auxilliary, Cover, Header, SideMenu } from "shared/index";
+import ForgotPassword from "src/pages/ForgotPassword";
+import RenderIf from "src/shared/components/RenderIf";
 import Login from "./Login";
 import PrivateRouter from "./PrivateRouter";
-import RenderIf from "src/shared/components/RenderIf";
 
 const Router = () => {
   const { defaultAlgorithm, darkAlgorithm } = theme;
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const token = true;
+  const token = false;
 
   return (
-    <RenderIf
-      conditions={token}
-      renderelse={
-        <Routes>
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      }
+    <ConfigProvider
+      theme={{
+        algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
+        token: {
+          colorPrimary: "#6743C1",
+        },
+      }}
     >
-      <ConfigProvider
-        theme={{
-          algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
-          token: {
-            colorPrimary: "#6743C1",
-          },
-        }}
+      <RenderIf
+        conditions={token}
+        renderelse={
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+          </Routes>
+        }
       >
         <Auxilliary>
           <SideMenu />
@@ -37,8 +39,8 @@ const Router = () => {
             </Cover>
           </Auxilliary>
         </Auxilliary>
-      </ConfigProvider>
-    </RenderIf>
+      </RenderIf>
+    </ConfigProvider>
   );
 };
 

@@ -1,12 +1,10 @@
 import {
   FolderOutlined,
   FormOutlined,
-  LeftOutlined,
-  RightOutlined,
   TeamOutlined,
-  UserOutlined,
+  UserOutlined
 } from "@ant-design/icons";
-import { Button, Image, Layout, Menu, Typography } from "antd";
+import { Image, Layout, Menu, Typography } from "antd";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "shared/media/imgs/crocusoft-logo.png";
@@ -15,7 +13,7 @@ import styles from "./SideMenu.module.scss";
 const enum Urls {
   TEAM = "/teams",
   PROJECT = "/projects",
-  REPORT = "/daily-report",
+  REPORT = "/reports",
   EMPLOYEE = "/",
 }
 export default function index() {
@@ -57,7 +55,7 @@ export default function index() {
             className: location.pathname === Urls.TEAM ? styles.activeLink : "",
           },
           {
-            label: <Link to="/daily-report">Daily Report</Link>,
+            label: <Link to="/reports">Daily Report</Link>,
             key: "3",
             icon: <FormOutlined />,
             className:

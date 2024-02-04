@@ -5,7 +5,7 @@ import {
   EyeOutlined,
   FilterOutlined,
   LockOutlined,
-  PlusOutlined
+  PlusOutlined,
 } from "@ant-design/icons";
 import type { SelectProps, TableProps } from "antd";
 import {
@@ -168,6 +168,7 @@ export default function index() {
       title: "Name",
       dataIndex: "firstName",
       key: "firstName",
+      sorter: (a, b) => a.firstName.localeCompare(b.firstName),
       render: (text) => (
         <>
           {/* <Avatar icon={<UserOutlined />} alt="Avatar" /> */}
@@ -179,6 +180,7 @@ export default function index() {
       title: "Surname",
       dataIndex: "lastName",
       key: "lastName",
+      sorter: (a, b) => a.lastName.localeCompare(b.lastName),
     },
     {
       title: "Mail",
@@ -340,7 +342,15 @@ export default function index() {
           </Tooltip>
         </Flex>
       </Flex>
-      <Table bordered className="table" columns={columns} dataSource={data} />
+      <Table
+        bordered
+        size="large"
+        className="table"
+        pagination={{ pageSize: 10 }}
+        scroll={{ y: 100, x: "auto" }}
+        columns={columns}
+        dataSource={data}
+      />
       <Drawer title="Employees Filter" onClose={onClose} open={open}>
         <Form
           name="basic"

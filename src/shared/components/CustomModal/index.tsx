@@ -1,5 +1,5 @@
-import { Modal } from 'antd'
-import React from 'react';
+import { Modal } from "antd";
+import React from "react";
 
 interface CustomModalProps {
   isModalOpen: boolean;
@@ -13,7 +13,6 @@ const CustomModal: React.FC<CustomModalProps> = ({
   handleOk,
   handleCancel,
   children,
-
 }) => {
   return (
     <Modal

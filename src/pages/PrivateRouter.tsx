@@ -10,7 +10,7 @@ export default function PrivateRouter() {
       <Routes>
         <Route path="/" element={<Employees />} />
         <Route path="/teams" element={<Teams />} />
-        <Route path="/daily-report" element={<DailyReport />} />
+        <Route path="/reports" element={<DailyReport />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

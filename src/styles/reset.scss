@@ -6,8 +6,8 @@
   text-decoration: none;
   // overflow: hidden;
 }
-.ant-menu-inline{
-  border-inline-end:none!important
+.ant-menu-inline {
+  border-inline-end: none !important;
 }
 ::-webkit-scrollbar {
   width: 8px;
@@ -21,11 +21,15 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #6743C1;
+  background: #6743c1;
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #6743C1;
+  background: #6743c1;
+}
+
+::-webkit-scrollbar-corner{
+  background-color: transparent;
 }

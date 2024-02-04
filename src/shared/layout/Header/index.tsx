@@ -8,7 +8,7 @@ import {
   Modal,
   Space,
   Tooltip,
-  Typography
+  Typography,
 } from "antd";
 import { useState } from "react";
 import { MdOutlineLightMode } from "react-icons/md";

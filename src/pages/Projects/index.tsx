@@ -2,9 +2,9 @@ import {
   EditOutlined,
   EyeOutlined,
   FilterOutlined,
-  PlusOutlined
+  PlusOutlined,
 } from "@ant-design/icons";
-import type { ConfigProviderProps, SelectProps, TableProps } from "antd";
+import type { SelectProps, TableProps } from "antd";
 import {
   Button,
   Descriptions,
@@ -17,72 +17,26 @@ import {
   Space,
   Table,
   Tooltip,
-  Typography
+  Typography,
 } from "antd";
 import { useState } from "react";
 export default function index() {
-  type SizeType = ConfigProviderProps["componentSize"];
   const onFinish = (values: any) => {
     console.log("Success:", values);
   };
   //select
-  const optionsTeams: SelectProps["options"] = [];
-  const optionsProject: SelectProps["options"] = [];
-  const optionsRole: SelectProps["options"] = [];
   const optionsEmployees: SelectProps["options"] = [];
-
-  const teams = [
-    { id: "1", teamName: "Frontend" },
-    { id: "2", teamName: "Backend" },
-    { id: "3", teamName: "Mobile" },
-  ];
-  const projects = [
-    { id: "1", projectName: "Plast" },
-    { id: "2", projectName: "Furniro" },
-    { id: "3", projectName: "DailyReport" },
-  ];
-  const roles = [
-    { id: "1", roleName: "Admin" },
-    { id: "2", roleName: "Employee" },
-  ];
   const employees = [
     { id: "1", employeeName: "Nazrin Isgandarova" },
     { id: "2", employeeName: "Rahman Aliyev" },
     { id: "3", employeeName: "Lala Agayeva" },
   ];
-  teams.map((team) => {
-    optionsTeams.push({
-      value: team.id,
-      label: team.teamName,
-    });
-  });
-  projects.map((project) => {
-    optionsProject.push({
-      value: project.id,
-      label: project.projectName,
-    });
-  });
-  roles.map((role) => {
-    optionsRole.push({
-      value: role.id,
-      label: role.roleName,
-    });
-  });
   employees.map((employee) => {
     optionsEmployees.push({
       value: employee.id,
       label: employee.employeeName,
     });
   });
-  const handleChangeTeams = (value: string | string[]) => {
-    console.log(`Selected: ${value}`);
-  };
-  const handleChangeProjects = (value: string | string[]) => {
-    console.log(`Selected: ${value}`);
-  };
-  const handleChangeRole = (value: string | string[]) => {
-    console.log(`Selected: ${value}`);
-  };
   const handleChangeEmployees = (value: string | string[]) => {
     console.log(`Selected: ${value}`);
   };
@@ -139,16 +93,10 @@ export default function index() {
   };
 
   ///table
-  const [status, setStatus] = useState<"active" | "deactive">("active");
-
   interface DataType {
     key: string;
     projectName: string;
   }
-  type FieldType = {
-    firstName?: string;
-    projectName?: string;
-  };
   const columns: TableProps<DataType>["columns"] = [
     {
       title: "Name",
