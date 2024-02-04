@@ -18,14 +18,13 @@ const index = () => {
         className={styles.changeForm}
       >
         <Form.Item<FieldType> label="New Password" name="newPassword">
-          <Input placeholder="********" size="large" />
+          <Input.Password placeholder="********" size="large" />
         </Form.Item>
         <Form.Item<FieldType> label="Confirm Password" name="confirmPassword">
-          <Input placeholder="********" size="large" />
+          <Input.Password placeholder="********" size="large" type="password"/>
         </Form.Item>
         <Button type="primary" htmlType="submit" block size="large">
-          Change Password
-        </Button>
+        Update Password        </Button>
       </Form>
     </Typography>
   );

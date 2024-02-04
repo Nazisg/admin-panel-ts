@@ -1,12 +1,10 @@
 import { Button, Form, Image, Input, Typography } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "shared/media/imgs/crocusoft-logo.png";
 import styles from "./Login..module.scss";
 export default function Login() {
-  const navigate = useNavigate();
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
-    navigate("/");
   };
 
   return (

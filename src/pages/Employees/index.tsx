@@ -142,7 +142,7 @@ export default function index() {
   };
 
   ///table
-  const [status, setStatus] = useState<"active" | "deactive">("active");
+  // const [status, setStatus] = useState<"active" | "deactive">("active");
 
   interface DataType {
     key: string;

@@ -15,12 +15,12 @@ const OTP = () => {
       className={styles.otpForm}
     >
       <Form.Item name="otp">
-        <InputOTP autoSubmit={form} size="large" inputType="numeric" />
+        <InputOTP styles={{}} autoSubmit={form} size="large" inputType="numeric" />
       </Form.Item>
 
       <Form.Item>
         <Button type="primary" htmlType="submit" block size="large">
-          Submit
+        Verify Code
         </Button>
       </Form.Item>
     </Form>

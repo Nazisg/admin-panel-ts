@@ -1,11 +1,12 @@
 .emailPage{
-    padding: 10% 0;
+    padding: 9% 0;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
    .emailForm{
     width: 80%;
+    max-width: 400px;
 
    }
 }
