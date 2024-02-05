@@ -1,6 +1,5 @@
-import { Button, Form, Image, Input, Typography } from "antd";
+import { Button, Form, Input, Typography } from "antd";
 import { Link } from "react-router-dom";
-import logo from "shared/media/imgs/crocusoft-logo.png";
 import styles from "./Login.module.scss";
 export default function Login() {
   const onFinish = (values: any) => {
@@ -10,10 +9,6 @@ export default function Login() {
   return (
     <div className={styles.loginBg}>
       <Form onFinish={onFinish} layout="vertical" className={styles.form}>
-        {/* <Typography.Title className={styles.titleLogo}>
-          <Image preview={false} src={logo} />
-          Crocusoft CRM
-        </Typography.Title> */}
         <Typography.Title className={styles.title}>Login</Typography.Title>
         <Form.Item name={"mail"} label="Email">
           <Input placeholder="example@crocusoft.com" size="large" />

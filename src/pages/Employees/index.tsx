@@ -184,7 +184,7 @@ export default function index() {
         size="large"
         className="table"
         pagination={{ pageSize: 10 }}
-        scroll={{ y: 300, x: "auto" }}
+        scroll={{ x: "auto" }}
         columns={columns}
         dataSource={data}
       />
