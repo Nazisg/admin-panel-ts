@@ -2,6 +2,7 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import {
   Avatar,
   Button,
+  Flex,
   Form,
   Input,
   Layout,
@@ -41,6 +42,7 @@ const Header: React.FC<ThemeProps> = ({ setIsDarkMode }) => {
   type FieldType = {
     newPassword?: string;
     confirmPassword?: string;
+    oldPassword?: string;
   };
 
   const handleClick = () => {
@@ -70,6 +72,8 @@ const Header: React.FC<ThemeProps> = ({ setIsDarkMode }) => {
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
+        okButtonProps={{ style: { display: "none" } }}
+        cancelButtonProps={{ style: { display: "none" } }}
       >
         <Form
           name="basic"
@@ -78,15 +82,20 @@ const Header: React.FC<ThemeProps> = ({ setIsDarkMode }) => {
           autoComplete="off"
           layout="vertical"
         >
+          <Form.Item<FieldType> label="Old Password" name="oldPassword">
+            <Input placeholder="********" size="large" />
+          </Form.Item>
           <Form.Item<FieldType> label="New Password" name="newPassword">
             <Input placeholder="********" size="large" />
           </Form.Item>
           <Form.Item<FieldType> label="Confirm Password" name="confirmPassword">
             <Input placeholder="********" size="large" />
           </Form.Item>
-          <Button type="primary" htmlType="submit">
-            Change Password
-          </Button>
+          <Flex justify="end">
+            <Button type="primary" htmlType="submit">
+              Change Password
+            </Button>
+          </Flex>
         </Form>
       </Modal>
     </Header>

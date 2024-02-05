@@ -10,7 +10,7 @@ import PrivateRouter from "./PrivateRouter";
 const Router = () => {
   const { defaultAlgorithm, darkAlgorithm } = theme;
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const token = false;
+  const token = true;
 
   return (
     <ConfigProvider
@@ -22,8 +22,8 @@ const Router = () => {
       }}
     >
       <RenderIf
-        conditions={token}
-        renderelse={
+        condition={token}
+        renderElse={
           <Routes>
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />

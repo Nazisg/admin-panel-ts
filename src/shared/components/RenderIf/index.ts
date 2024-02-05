@@ -1,12 +1,12 @@
-import { RenderIfType } from "shared/types/index";
+import { RenderIfProps } from "shared/types/index";
 
-const RenderIf: React.FC<RenderIfType> = ({
+const RenderIf: React.FC<RenderIfProps> = ({
   children,
-  conditions,
-  renderelse = "",
+  condition,
+  renderElse = "",
 }) => {
-  if (conditions) return children;
-  return renderelse;
+  if (condition) return children;
+  return renderElse;
 };
 
 export default RenderIf;

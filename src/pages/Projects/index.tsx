@@ -4,153 +4,97 @@ import {
   FilterOutlined,
   PlusOutlined,
 } from "@ant-design/icons";
-import type { SelectProps, TableProps } from "antd";
 import {
   Button,
-  Descriptions,
-  Drawer,
   Flex,
-  Form,
-  Input,
-  Modal,
-  Select,
   Space,
   Table,
+  TableColumnsType,
   Tooltip,
   Typography,
 } from "antd";
 import { useState } from "react";
-export default function index() {
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
-  };
-  //select
-  const optionsEmployees: SelectProps["options"] = [];
-  const employees = [
-    { id: "1", employeeName: "Nazrin Isgandarova" },
-    { id: "2", employeeName: "Rahman Aliyev" },
-    { id: "3", employeeName: "Lala Agayeva" },
-  ];
-  employees.map((employee) => {
-    optionsEmployees.push({
-      value: employee.id,
-      label: employee.employeeName,
-    });
-  });
-  const handleChangeEmployees = (value: string | string[]) => {
-    console.log(`Selected: ${value}`);
-  };
+import { ProjectType } from "shared/types";
+import ActionButton from "src/shared/components/ActionButton";
+import Filter from "src/shared/components/Filter";
+import styles from "./Projects.module.scss";
+import ProjectModal from "./modals/";
 
-  //filter Drawer
-  const [open, setOpen] = useState(false);
-  const showDrawer = () => {
-    setOpen(true);
-  };
-  const onClose = () => {
-    setOpen(false);
-  };
-  ///view
-  const [openView, setOpenView] = useState(false);
+export default function Projects() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [filterOpen, setFilterOpen] = useState(false);
+  const [status, setStatus] = useState<
+    "view" | "delete" | "update" | "create" | "resetPassword"
+  >("view");
 
-  const showDrawerView = () => {
-    setOpenView(true);
+  const handleCreate = () => {
+    setModalOpen(true);
+    setStatus("create");
   };
-  const onCloseView = () => {
-    setOpenView(false);
-  };
-  const [selectedEmployee, setSelectedEmployee] = useState<DataType | null>(
-    null
-  );
-  const handleView = (record: DataType) => {
-    setSelectedEmployee(record);
-    showDrawerView();
-  };
-
-  //create modal
-  const [isModalOpenAdd, setIsModalOpenAdd] = useState(false);
-  const showModalAdd = () => {
-    setIsModalOpenAdd(true);
-  };
-  const handleOkAdd = () => {
-    setIsModalOpenAdd(false);
-  };
-  const handleCancelAdd = () => {
-    setIsModalOpenAdd(false);
-  };
-  //update modal
-  const [isModalOpenUpdate, setIsModalOpenUpdate] = useState(false);
-
-  const showModalUpdate = () => {
-    setIsModalOpenUpdate(true);
-  };
-
-  const handleOkUpdate = () => {
-    setIsModalOpenUpdate(false);
-  };
-
-  const handleCancelUpdate = () => {
-    setIsModalOpenUpdate(false);
-  };
-
-  ///table
-  interface DataType {
-    key: string;
-    projectName: string;
-  }
-  const columns: TableProps<DataType>["columns"] = [
+  const columns: TableColumnsType<ProjectType> = [
     {
-      title: "Name",
-      dataIndex: "projectName",
-      key: "projectName",
+      title: "Project",
+      dataIndex: "project",
+      ellipsis: true,
+      sorter: (a, b) => a.project.localeCompare(b.project),
     },
     {
       title: "Action",
       key: "action",
-      render: (record) => (
+      ellipsis: true,
+      render: () => (
         <Space size="small">
-          <Tooltip placement="top" title="View">
-            <Button
-              className={"btnView"}
-              shape="circle"
-              onClick={() => handleView(record)}
-            >
-              <EyeOutlined />
-            </Button>
-          </Tooltip>
-          <Tooltip placement="top" title="Update">
-            <Button
-              className={"btnUpdate"}
-              shape="circle"
-              onClick={showModalUpdate}
-            >
-              <EditOutlined />
-            </Button>
-          </Tooltip>
+          <ActionButton
+            setStatus={setStatus}
+            setModalOpen={setModalOpen}
+            title="View"
+            icon={<EyeOutlined />}
+            type="btnView"
+          />
+          <ActionButton
+            setStatus={setStatus}
+            setModalOpen={setModalOpen}
+            title="Update"
+            icon={<EditOutlined />}
+            type="btnUpdate"
+          />
         </Space>
       ),
     },
   ];
-  const data: DataType[] = [
+  const data: ProjectType[] = [
     {
       key: "1",
-      projectName: "Plast",
+      project: "Furniro",
+      employees: [
+        { name: "Nazrin", surname: "Isgandarova" },
+        { name: "Lale", surname: "Qarayeva" },
+      ],
     },
     {
       key: "2",
-      projectName: "Furniro",
+      project: "Plast",
+      employees: [
+        { name: "Rahman", surname: "Aliyev" },
+        { name: "Musa", surname: "Agali" },
+      ],
     },
     {
       key: "3",
-      projectName: "Daily Report",
+      project: "CRM",
+      employees: [
+        { name: "Aytac", surname: "Qarayev" },
+        { name: "Murad", surname: "Hasanli" },
+      ],
     },
   ];
   return (
     <>
-      <Flex justify="space-between">
+      <Flex align="baseline" gap="small" className={styles.header}>
         <Typography.Title className="title">Projects</Typography.Title>
-        <Flex justify="flex-end" align="center" gap="middle">
+        <Flex justify="flex-end" align="center" gap="small">
           <Button
-            onClick={showDrawer}
+            onClick={() => setFilterOpen(true)}
             icon={<FilterOutlined />}
             size="large"
             type="primary"
@@ -160,7 +104,7 @@ export default function index() {
           </Button>
           <Tooltip placement="top" title="Create">
             <Button
-              onClick={showModalAdd}
+              onClick={handleCreate}
               type="primary"
               shape="circle"
               icon={<PlusOutlined />}
@@ -170,113 +114,23 @@ export default function index() {
           </Tooltip>
         </Flex>
       </Flex>
-      <Table bordered className="table" columns={columns} dataSource={data} />
-      <Drawer title="Projects Filter" onClose={onClose} open={open}>
-        <Form
-          name="basic"
-          onFinish={onFinish}
-          autoComplete="off"
-          layout="vertical"
-        >
-          <Form.Item label="Project Name" name="projectName">
-            <Input placeholder="Furniro" size="large" />
-          </Form.Item>
-        </Form>
-      </Drawer>
-      <Modal
-        title="Create Project"
-        open={isModalOpenAdd}
-        onOk={handleOkAdd}
-        onCancel={handleCancelAdd}
-        centered
-      >
-        <Form
-          name="basic"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          autoComplete="off"
-          layout="vertical"
-        >
-          <Form.Item
-            label="Project Name"
-            name="projectName"
-            rules={[{ required: true, message: "" }]}
-          >
-            <Input placeholder="Plast" size="large" />
-          </Form.Item>
-          <Form.Item
-            label="Employees"
-            name="employees"
-            rules={[{ required: true, message: "" }]}
-          >
-            <Select
-              mode="tags"
-              size="large"
-              placeholder="Furniro"
-              onChange={handleChangeEmployees}
-              options={optionsEmployees}
-            />
-          </Form.Item>
-          {/* <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item> */}
-        </Form>
-      </Modal>
-      <Drawer title="View Project" onClose={onCloseView} open={openView}>
-        {selectedEmployee && (
-          <Descriptions layout="vertical" bordered column={1}>
-            {Object.entries(selectedEmployee).map(([key, value]) => (
-              <Descriptions.Item key={key} label={key}>
-                {value}
-              </Descriptions.Item>
-            ))}
-          </Descriptions>
-        )}
-      </Drawer>
-      <Modal
-        title="Update Project"
-        open={isModalOpenUpdate}
-        onOk={handleOkUpdate}
-        onCancel={handleCancelUpdate}
-        centered
-      >
-        <Form
-          name="basic"
-          onFinish={onFinish}
-          autoComplete="off"
-          layout="vertical"
-        >
-          <Form.Item
-            label="Project Name"
-            name="projectName"
-            rules={[{ required: true, message: "" }]}
-          >
-            <Input placeholder="Plast" size="large" />
-          </Form.Item>
-
-          <Form.Item
-            label="Employees"
-            name="employees"
-            rules={[{ required: true, message: "" }]}
-          >
-            <Select
-              mode="tags"
-              size="large"
-              placeholder="Furniro"
-              onChange={handleChangeEmployees}
-              options={optionsEmployees}
-            />
-          </Form.Item>
-
-          {/* <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item> */}
-        </Form>
-      </Modal>
+      <Table
+        bordered
+        className="table"
+        scroll={{ y: 300, x: "auto" }}
+        columns={columns}
+        dataSource={data}
+      />
+      <ProjectModal
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+        statusType={status}
+      />
+      <Filter
+        modalOpen={filterOpen}
+        setModalOpen={setFilterOpen}
+        statusType="project"
+      />
     </>
   );
 }

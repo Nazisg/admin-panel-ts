@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import styles from "./ForgotPassword.module.scss";
 import ChangePassword from "./steps/ChangePassword";
 import Email from "./steps/Email";
-import OTP from './steps/OTP'
+import OTP from "./steps/OTP";
 const steps = [
   {
     title: "Email",

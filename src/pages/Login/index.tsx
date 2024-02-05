@@ -1,7 +1,7 @@
 import { Button, Form, Image, Input, Typography } from "antd";
 import { Link } from "react-router-dom";
 import logo from "shared/media/imgs/crocusoft-logo.png";
-import styles from "./Login..module.scss";
+import styles from "./Login.module.scss";
 export default function Login() {
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
@@ -19,7 +19,7 @@ export default function Login() {
           <Input placeholder="example@crocusoft.com" size="large" />
         </Form.Item>
         <Form.Item name={"password"} label="Password">
-          <Input.Password type="password" placeholder="Password" size="large" />
+          <Input.Password type="password" placeholder="********" size="large" />
         </Form.Item>
         <Form.Item>
           <Link to="/forgot-password" className={styles.forgot}>

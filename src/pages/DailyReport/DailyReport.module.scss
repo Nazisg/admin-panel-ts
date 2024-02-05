@@ -1,0 +1,15 @@
+.header {
+  flex-direction: column;
+
+  @media only screen and (min-width: 650px) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .btns {
+    flex-direction: column;
+    align-items: flex-start;
+    @media only screen and (min-width: 450px) {
+      flex-direction: row;
+    }
+  }
+}

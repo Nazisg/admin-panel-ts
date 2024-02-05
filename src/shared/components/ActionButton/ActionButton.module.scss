@@ -1,0 +1,36 @@
+.btnView {
+  color: #226add;
+  border: 1px solid #226add;
+  &:hover {
+    background-color: #226add9a;
+    color: #fff !important;
+    border: 1px solid #226add;
+  }
+}
+.btnUpdate {
+  color: #ffd000;
+  border: 1px solid #ffd000;
+  &:hover {
+    color: #fff !important;
+    background-color: #ffd00091;
+    border: 1px solid #ffd000 !important;
+  }
+}
+.btnReset {
+  color: #ff7300;
+  border: 1px solid #ff7300;
+  &:hover {
+    color: #fff !important;
+    background-color: #ff73009a;
+    border: 1px solid #ff7300 !important;
+  }
+}
+.btnDel {
+  color: #fc5a5d;
+  border: 1px solid #fc5a5d;
+  &:hover {
+    color: #fff !important;
+    background-color: #fc5a5d9a;
+    border: 1px solid #fc5a5d !important;
+  }
+}

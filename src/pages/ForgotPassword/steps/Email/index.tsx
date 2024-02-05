@@ -1,7 +1,7 @@
 import { Button, Form, Input, Typography } from "antd";
 import styles from "./Email.module.scss";
 
-const index = () => {
+const Email = () => {
   const onFinish = (values: any) => {
     console.log("Received values of form: ", values);
   };
@@ -27,4 +27,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Email;

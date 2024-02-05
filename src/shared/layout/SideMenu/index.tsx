@@ -2,10 +2,10 @@ import {
   FolderOutlined,
   FormOutlined,
   TeamOutlined,
-  UserOutlined
+  UserOutlined,
 } from "@ant-design/icons";
 import { Image, Layout, Menu, Typography } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import logo from "shared/media/imgs/crocusoft-logo.png";
 import styles from "./SideMenu.module.scss";
@@ -16,18 +16,29 @@ const enum Urls {
   REPORT = "/reports",
   EMPLOYEE = "/",
 }
-export default function index() {
+export default function SideMenu() {
   const { Sider } = Layout;
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
-  console.log(location);
 
+  useEffect(() => {
+    const handleResize = () => {
+      const innerWidth = window.innerWidth;
+      setCollapsed(innerWidth < 900);
+    };
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <Sider
       className={styles.sideMenu}
       theme="light"
-      collapsible
+      collapsible={window.innerWidth >= 900}
       collapsed={collapsed}
+      breakpoint="lg"
       onCollapse={(value) => setCollapsed(value)}
     >
       <div className="demo-logo-vertical" />
