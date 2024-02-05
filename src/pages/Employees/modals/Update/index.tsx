@@ -1,13 +1,13 @@
 import {
-    Button,
-    Col,
-    Flex,
-    Form,
-    Input,
-    Modal,
-    Row,
-    Select,
-    SelectProps,
+  Button,
+  Col,
+  Flex,
+  Form,
+  Input,
+  Modal,
+  Row,
+  Select,
+  SelectProps,
 } from "antd";
 import { ActionModalProps } from "shared/types";
 
@@ -93,31 +93,6 @@ const Update: React.FC<ActionModalProps> = ({ modalOpen, setModalOpen }) => {
           </Col>
           <Col span={12}>
             <Form.Item
-              label="Password"
-              name="mail"
-              rules={[{ required: true, message: "" }]}
-            >
-              <Input placeholder="********" size="large" />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={[16, 16]}>
-          <Col span={12}>
-            <Form.Item
-              label="Team"
-              name="team"
-              rules={[{ required: true, message: "" }]}
-            >
-              <Select
-                size="large"
-                onChange={handleChangeTeams}
-                placeholder="Frontend"
-                options={optionsTeams}
-              />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
               label="Role"
               name="role"
               rules={[{ required: true, message: "" }]}
@@ -131,6 +106,18 @@ const Update: React.FC<ActionModalProps> = ({ modalOpen, setModalOpen }) => {
             </Form.Item>
           </Col>
         </Row>
+        <Form.Item
+          label="Team"
+          name="team"
+          rules={[{ required: true, message: "" }]}
+        >
+          <Select
+            size="large"
+            onChange={handleChangeTeams}
+            placeholder="Frontend"
+            options={optionsTeams}
+          />
+        </Form.Item>
         <Flex justify="end">
           <Button type="primary" htmlType="submit">
             Update
