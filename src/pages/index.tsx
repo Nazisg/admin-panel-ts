@@ -10,7 +10,7 @@ import PrivateRouter from "./PrivateRouter";
 const Router = () => {
   const { defaultAlgorithm, darkAlgorithm } = theme;
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const token = false;
+  const token = true;
 
   return (
     <ConfigProvider
